@@ -3,9 +3,14 @@ import java.util.*;
 
 import static java.lang.Math.abs;
 
-public class Reports {
+public class NumberOfSafeRecords {
     public static void main(String[] args) {
-        int totalSafe = 0;
+        ArrayList<ArrayList<Integer>> myListOfLists = importNumbers();
+        System.out.println(getNumberOfSafeRecords(myListOfLists));
+
+    }
+
+    public static ArrayList<ArrayList<Integer>> importNumbers(){
         ArrayList<ArrayList<Integer>> myListOfLists = new ArrayList<ArrayList<Integer>>();
 
 
@@ -15,37 +20,41 @@ public class Reports {
             BufferedReader br = new BufferedReader(fileReader);
 
 
-            ArrayList<Integer> listToAdd = new ArrayList<>();
+            ArrayList<Integer> listToAdd;
             String line;
             while((line = br.readLine()) != null) {
                 String[] numbs = line.split(" ");
                 listToAdd = convertStringArrayToIntegerArrayList(numbs);
                 myListOfLists.add(listToAdd);
-                listToAdd.clear();
             }
+            br.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-        for (ArrayList<Integer> list : myListOfLists) {
-            boolean incrOrDecr = true;
-            boolean betwOneOrThree = true;
-            incrOrDecr = allDecreasingOrIncreasing(list);
-            betwOneOrThree = adjacentDifferenceBetweenOneAndThree(list);
-            if (incrOrDecr && betwOneOrThree) {
-                totalSafe++;
-            }
-        }
-
-
-        System.out.println(totalSafe);
-
-
+        return myListOfLists;
     }
 
+    public static int getNumberOfSafeRecords(ArrayList<ArrayList<Integer>> myArray) {
+        boolean checkTrue;
+        int total = 0;
+        
+        for (ArrayList<Integer> row : myArray) {
+            checkTrue = checkDecreasingOrIncreasingAndWithinRange(row);
+            if (checkTrue){
+                total++;
+            }
+        }
+        return total;
+    }
 
+    public static boolean checkDecreasingOrIncreasingAndWithinRange(ArrayList<Integer> myIntArrayList) {
+        boolean increasingOrDecreasing;
+        boolean betweenOneAndThree;
+        increasingOrDecreasing = allDecreasingOrIncreasing(myIntArrayList);
+        betweenOneAndThree = adjacentDifferenceBetweenOneAndThree(myIntArrayList);
+        return increasingOrDecreasing && betweenOneAndThree;
+    }
 
     public static boolean allDecreasingOrIncreasing(ArrayList<Integer> myArray) {
         boolean isIncreasing = true;
@@ -53,11 +62,17 @@ public class Reports {
 
         int index = 1;
         while(isIncreasing && index < myArray.size()){
-            if (myArray.get(index) < myArray.get(index-1)) {
+
+            if (myArray.get(index) == myArray.get(index-1)) {
+                isIncreasing = false;
+                isDecreasing = false;
+                break;
+            }
+            if (myArray.get(index) <= myArray.get(index-1)) {
                 isIncreasing = false;
             }
 
-            if (myArray.get(index) > myArray.get(index-1)) {
+            if (myArray.get(index) >= myArray.get(index-1)) {
                 isDecreasing = false;
             }
             index++;
