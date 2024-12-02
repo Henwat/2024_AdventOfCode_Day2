@@ -11,7 +11,7 @@ public class NumberOfSafeRecords {
 
     }
 
-    public static ArrayList<ArrayList<Integer>> importNumbers(){
+    private static ArrayList<ArrayList<Integer>> importNumbers(){
         ArrayList<ArrayList<Integer>> myListOfLists = new ArrayList<ArrayList<Integer>>();
 
 
@@ -50,7 +50,7 @@ public class NumberOfSafeRecords {
         return total;
     }
 
-    public static boolean checkDecreasingOrIncreasingAndWithinRange(ArrayList<Integer> myIntArrayList) {
+    private static boolean checkDecreasingOrIncreasingAndWithinRange(ArrayList<Integer> myIntArrayList) {
         boolean increasingOrDecreasing;
         boolean betweenOneAndThree;
         increasingOrDecreasing = allDecreasingOrIncreasing(myIntArrayList);
@@ -58,7 +58,7 @@ public class NumberOfSafeRecords {
         return increasingOrDecreasing && betweenOneAndThree;
     }
 
-    public static boolean allDecreasingOrIncreasing(ArrayList<Integer> myArray) {
+    private static boolean allDecreasingOrIncreasing(ArrayList<Integer> myArray) {
         boolean isIncreasing = true;
         boolean isDecreasing = true;
 
@@ -82,7 +82,7 @@ public class NumberOfSafeRecords {
         return isIncreasing || isDecreasing;
     }
 
-    public static boolean adjacentDifferenceBetweenOneAndThree (ArrayList<Integer> myArray) {
+    private static boolean adjacentDifferenceBetweenOneAndThree (ArrayList<Integer> myArray) {
         boolean diffWithinRange = true;
         int difference;
 
@@ -97,7 +97,7 @@ public class NumberOfSafeRecords {
 
     }
 
-    public static ArrayList<Integer> convertStringArrayToIntegerArrayList(String[] myStringArray) {
+    private static ArrayList<Integer> convertStringArrayToIntegerArrayList(String[] myStringArray) {
         ArrayList<Integer> myIntArrayList = new ArrayList<>();
 
         for (String number : myStringArray) {
