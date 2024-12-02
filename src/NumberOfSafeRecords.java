@@ -5,6 +5,7 @@ import static java.lang.Math.abs;
 
 public class NumberOfSafeRecords {
     public static void main(String[] args) {
+
         ArrayList<ArrayList<Integer>> myListOfLists = importNumbers();
         System.out.println(getNumberOfSafeRecords(myListOfLists));
 
@@ -15,7 +16,8 @@ public class NumberOfSafeRecords {
 
 
         try {
-            File file = new File("./resources/input.txt");
+            //ClassLoader classLoader = getClass()
+            File file = new File("/home/henwat/workspace/2024_AdventOfCode_Day2/resources/input.txt");
             FileReader fileReader = new FileReader(file);
             BufferedReader br = new BufferedReader(fileReader);
 
@@ -61,14 +63,14 @@ public class NumberOfSafeRecords {
         boolean isDecreasing = true;
 
         int index = 1;
-        while(isIncreasing && index < myArray.size()){
+        while((isIncreasing || isDecreasing) && index < myArray.size()){
 
             if (myArray.get(index) == myArray.get(index-1)) {
                 isIncreasing = false;
                 isDecreasing = false;
                 break;
             }
-            if (myArray.get(index) <= myArray.get(index-1)) {
+            if (myArray.get(index) <= myArray.get(index-1)) { //is increasing?
                 isIncreasing = false;
             }
 
